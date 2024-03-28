@@ -20,8 +20,6 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'chmod +x docker-login.sh'
-                sh './docker-login.sh'
                 sh "docker build --build-arg debug_mode=--no-dev -t rmamba/tor-privoxy:latest ."
             }
         }
