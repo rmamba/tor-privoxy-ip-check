@@ -31,7 +31,6 @@ pipeline {
         stage('Docker:latest') {
             steps {
                 sh "docker push rmamba/tor-privoxy:latest"
-                sh "docker rmi rmamba/tor-privoxy:latest"
             }
         }
         stage('Push to stage') {
@@ -50,6 +49,7 @@ pipeline {
                 sh "docker tag rmamba/tor-privoxy:latest rmamba/tor-privoxy:${params.gitLabel}"
                 sh "docker push rmamba/tor-privoxy:${params.gitLabel}"
                 sh "docker rmi rmamba/tor-privoxy:${params.gitLabel}"
+                sh "docker rmi rmamba/tor-privoxy:latest"
             }
         }
         stage('Push to production') {
